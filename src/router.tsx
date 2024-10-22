@@ -4,9 +4,14 @@ import NotFound from "@/domains/not-found";
 import ContactListPage from "@/domains/contacts/ContactListPage";
 import ContactPage from "@/domains/contacts/ContactPage";
 
+export const routes = {
+  home: "/",
+  contact: (id?: string) => (id ? `/contact/${id}` : "/contact"),
+};
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: routes.home,
     element: <GlobalLayout />,
     errorElement: <NotFound />,
     children: [
@@ -18,7 +23,7 @@ const router = createBrowserRouter([
             element: <ContactListPage />,
           },
           {
-            path: "/contact/:contactId",
+            path: "/contact/:contactId?",
             element: <ContactPage />,
           },
         ],
