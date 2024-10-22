@@ -6,17 +6,16 @@ import { type Contact } from "@/domains/contacts/types";
 import { getInitials } from "@/domains/contacts/utils/contact";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/router";
-import RemoveContactAlert from "@/domains/contacts/ContactListPage/RemoveContactAlert";
+import DeleteContactAlert from "@/domains/contacts/ContactListPage/DeleteContactAlert";
 
 type Props = {
   data: Contact;
   className?: string;
+  onDelete: () => Promise<void>;
 };
 
-const ContactItem = ({ data, className }: Props) => {
+const ContactItem = ({ data, className, onDelete }: Props) => {
   const initials = getInitials(data.fullName);
-
-  const handleRemove = () => {};
 
   return (
     <div
@@ -39,11 +38,11 @@ const ContactItem = ({ data, className }: Props) => {
               className="rounded-full"
               asChild
             >
-              <Link to={routes.contact(data.id)} state={{ contact: data }}>
+              <Link to={routes.contact(data.id)}>
                 <PencilIcon />
               </Link>
             </Button>
-            <RemoveContactAlert contact={data} onOk={handleRemove}>
+            <DeleteContactAlert contact={data} onDelete={onDelete}>
               <Button
                 variant="outline"
                 size="icon"
@@ -51,7 +50,7 @@ const ContactItem = ({ data, className }: Props) => {
               >
                 <TrashIcon />
               </Button>
-            </RemoveContactAlert>
+            </DeleteContactAlert>
           </div>
         </div>
         <div className="text-sm text-muted-foreground">{data.phoneNumber}</div>

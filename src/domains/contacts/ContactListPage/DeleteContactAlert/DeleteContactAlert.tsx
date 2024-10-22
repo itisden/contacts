@@ -11,15 +11,33 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Contact } from "@/domains/contacts/types";
+import { useDeleteContact } from "@/domains/contacts/hooks/queries";
 
 type Props = {
-  onOk: () => void;
+  onDelete?: () => Promise<void>;
   onCancel?: () => void;
   children: ReactNode;
   contact: Contact;
 };
 
-const RemoveContactAlert = ({ onOk, onCancel, contact, children }: Props) => {
+const DeleteContactAlert = ({
+  onDelete,
+  onCancel,
+  contact,
+  children,
+}: Props) => {
+  const { loading, mutate } = useDeleteContact();
+
+  const handleDelete = async () => {
+    try {
+      await mutate(contact.id);
+      onDelete?.();
+    } catch (e) {
+      console.error(e);
+      // TODO: handle error
+    }
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -33,11 +51,13 @@ const RemoveContactAlert = ({ onOk, onCancel, contact, children }: Props) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={onCancel}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onOk}>Delete</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete} disabled={loading}>
+            {loading ? "Deleting" : "Delete"}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
 };
 
-export default RemoveContactAlert;
+export default DeleteContactAlert;
