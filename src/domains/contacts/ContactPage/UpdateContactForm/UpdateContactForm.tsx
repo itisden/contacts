@@ -28,7 +28,7 @@ const UpdateContactForm = ({ id }: Props) => {
 
   if (loading) return <span>Loading</span>;
 
-  if (error) return <span>{error.message}</span>;
+  if (error) return <span>{error?.message || JSON.stringify(error)}</span>;
 
   return <ContactForm onSubmit={handleSave} contact={data as Contact} />;
 };
