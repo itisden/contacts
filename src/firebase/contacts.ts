@@ -4,8 +4,8 @@ import {
   getDoc,
   doc,
   addDoc,
-  setDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore/lite";
 import { firestore } from "@/firebase/app";
 import { Contact } from "@/domains/contacts/types";
@@ -38,8 +38,9 @@ export const createContact = async (contact: Omit<Contact, "id">) => {
 };
 
 export const updateContact = async (contact: Contact) => {
-  const docRef = doc(firestore, CONTACTS_COLLECTION, contact.id);
-  await setDoc(docRef, contact, { merge: true });
+  const { id, ...contactData } = contact;
+  const docRef = doc(firestore, CONTACTS_COLLECTION, id);
+  await updateDoc(docRef, contactData);
 };
 
 export const deleteContact = async (id: string) => {
