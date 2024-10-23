@@ -3,6 +3,8 @@ import { type Contact } from "@/domains/contacts/types";
 import { useContact } from "@/domains/contacts/hooks/queries";
 import { updateContact } from "@/firebase/contacts";
 import { routes } from "@/router";
+import { useToast } from "@/hooks/use-toast";
+import { createErrorToastObject } from "@/utils/toasts";
 import ContactForm, { type SubmissionValues } from "../ContactForm";
 
 type Props = {
@@ -10,6 +12,7 @@ type Props = {
 };
 
 const UpdateContactForm = ({ id }: Props) => {
+  const { toast } = useToast();
   const { loading, data, error } = useContact(id);
   const navigate = useNavigate();
 
@@ -22,7 +25,11 @@ const UpdateContactForm = ({ id }: Props) => {
       navigate(routes.home);
     } catch (e) {
       console.error(e);
-      // TODO: handle error
+      if (e instanceof Error) {
+        toast(createErrorToastObject(e.message));
+      } else {
+        toast(createErrorToastObject());
+      }
     }
   };
 

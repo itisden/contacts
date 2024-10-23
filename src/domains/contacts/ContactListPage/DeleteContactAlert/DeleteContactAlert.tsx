@@ -10,8 +10,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useToast } from "@/hooks/use-toast";
 import { Contact } from "@/domains/contacts/types";
 import { useDeleteContact } from "@/domains/contacts/hooks/queries";
+import { createErrorToastObject } from "@/utils/toasts";
 
 type Props = {
   onDelete?: () => Promise<void>;
@@ -26,6 +28,7 @@ const DeleteContactAlert = ({
   contact,
   children,
 }: Props) => {
+  const { toast } = useToast();
   const { loading, mutate } = useDeleteContact();
 
   const handleDelete = async () => {
@@ -34,7 +37,11 @@ const DeleteContactAlert = ({
       onDelete?.();
     } catch (e) {
       console.error(e);
-      // TODO: handle error
+      if (e instanceof Error) {
+        toast(createErrorToastObject(e.message));
+      } else {
+        toast(createErrorToastObject());
+      }
     }
   };
 

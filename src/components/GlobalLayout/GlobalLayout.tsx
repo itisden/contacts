@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
 import Header from "./Header";
 import Footer from "./Footer";
 import Content from "./Content";
@@ -9,6 +10,7 @@ const GlobalLayout = () => {
       <Header />
       <Content>
         <Outlet />
+        <Toaster />
       </Content>
       <Footer />
     </div>
