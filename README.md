@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Contacts App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a contact management app built using the following technologies:
 
-Currently, two official plugins are available:
+- **React**: For building the user interface.
+- **Vite**: A fast and optimized build tool.
+- **Tailwind CSS**: For utility-first styling.
+- **shadcn/ui**: For additional UI components.
+- **React Query**: For managing server state and caching.
+- **Firebase SDK**: For storing and retrieving contacts data in Firestore.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+To run the app locally, follow these steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+```bash
+git clone https://github.com/your-repo/contacts-app.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Navigate into the project directory:
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+```bash
+cd contacts-app
+```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+4. Create a .env.local file in the root directory and provide the necessary environment variables
+
+5. Start the development server:
+
+```bash
+npm run dev
 ```
