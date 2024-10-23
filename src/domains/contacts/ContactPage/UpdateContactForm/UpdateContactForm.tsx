@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { type Contact } from "@/domains/contacts/types";
 import { useContact } from "@/domains/contacts/hooks/queries";
-import { updateContact } from "@/firebase/contacts";
 import { routes } from "@/router";
 import { useToast } from "@/hooks/use-toast";
 import { createErrorToastObject } from "@/utils/toasts";
+import { useUpdateContact } from "@/domains/contacts/hooks/queries";
 import ContactForm, { type SubmissionValues } from "../ContactForm";
 
 type Props = {
@@ -13,12 +13,13 @@ type Props = {
 
 const UpdateContactForm = ({ id }: Props) => {
   const { toast } = useToast();
-  const { loading, data, error } = useContact(id);
+  const { mutateAsync } = useUpdateContact();
+  const { isLoading, data, error } = useContact(id);
   const navigate = useNavigate();
 
   const handleSave = async (values: SubmissionValues) => {
     try {
-      await updateContact({
+      await mutateAsync({
         id,
         ...values,
       });
@@ -33,7 +34,7 @@ const UpdateContactForm = ({ id }: Props) => {
     }
   };
 
-  if (loading) return <span>Loading</span>;
+  if (isLoading) return <span>Loading</span>;
 
   if (error) return <span>{error?.message || JSON.stringify(error)}</span>;
 

@@ -1,19 +1,54 @@
-import { useCallback } from "react";
-import { getContacts, getContact, deleteContact } from "@/firebase/contacts";
-import useFetch from "@/hooks/useFetch";
-import useMutation from "@/hooks/useMutation";
+import {
+  getContacts,
+  getContact,
+  deleteContact,
+  createContact,
+  updateContact,
+} from "@/firebase/contacts";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-// TODO: replace query hooks with react-query
+const CONTACTS = "contacts";
 
 export const useContacts = () => {
-  return useFetch(getContacts);
+  return useQuery({ queryKey: [CONTACTS], queryFn: getContacts });
 };
 
 export const useContact = (id: string) => {
-  const getContactCallback = useCallback(() => getContact(id), [id]);
-  return useFetch(getContactCallback);
+  return useQuery({
+    queryKey: [CONTACTS, id],
+    queryFn: () => getContact(id),
+  });
+};
+
+export const useAddContact = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createContact,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [CONTACTS] });
+    },
+  });
+};
+
+export const useUpdateContact = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updateContact,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [CONTACTS] });
+    },
+  });
 };
 
 export const useDeleteContact = () => {
-  return useMutation(deleteContact);
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteContact,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [CONTACTS] });
+    },
+  });
 };

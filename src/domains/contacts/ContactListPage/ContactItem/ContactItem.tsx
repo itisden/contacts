@@ -11,10 +11,9 @@ import DeleteContactAlert from "@/domains/contacts/ContactListPage/DeleteContact
 type Props = {
   data: Contact;
   className?: string;
-  onDelete: () => Promise<void>;
 };
 
-const ContactItem = ({ data, className, onDelete }: Props) => {
+const ContactItem = ({ data, className }: Props) => {
   const initials = getInitials(data.fullName);
 
   return (
@@ -42,7 +41,7 @@ const ContactItem = ({ data, className, onDelete }: Props) => {
                 <PencilIcon />
               </Link>
             </Button>
-            <DeleteContactAlert contact={data} onDelete={onDelete}>
+            <DeleteContactAlert contact={data}>
               <Button
                 variant="outline"
                 size="icon"

@@ -16,25 +16,18 @@ import { useDeleteContact } from "@/domains/contacts/hooks/queries";
 import { createErrorToastObject } from "@/utils/toasts";
 
 type Props = {
-  onDelete?: () => Promise<void>;
   onCancel?: () => void;
   children: ReactNode;
   contact: Contact;
 };
 
-const DeleteContactAlert = ({
-  onDelete,
-  onCancel,
-  contact,
-  children,
-}: Props) => {
+const DeleteContactAlert = ({ onCancel, contact, children }: Props) => {
   const { toast } = useToast();
-  const { loading, mutate } = useDeleteContact();
+  const { isPending, mutateAsync } = useDeleteContact();
 
   const handleDelete = async () => {
     try {
-      await mutate(contact.id);
-      onDelete?.();
+      await mutateAsync(contact.id);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -58,8 +51,8 @@ const DeleteContactAlert = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={onCancel}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete} disabled={loading}>
-            {loading ? "Deleting" : "Delete"}
+          <AlertDialogAction onClick={handleDelete} disabled={isPending}>
+            {isPending ? "Deleting" : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
