@@ -4,7 +4,7 @@ import {
   deleteContact,
   createContact,
   updateContact,
-} from "@/firebase/contacts";
+} from "@/domains/contacts/api/contacts";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const CONTACTS = "contacts";

@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/router";
-import { type Contact } from "@/domains/contacts/types";
+import { type Contact, type ContactWithoutId } from "@/domains/contacts/types";
 
 const contactFormSchema = z.object({
   username: z
@@ -45,7 +45,7 @@ export type SubmissionValues = z.infer<typeof contactFormSchema>;
 
 type Props = {
   onSubmit: (data: SubmissionValues) => Promise<void>;
-  contact: Contact | Omit<Contact, "id">;
+  contact: Contact | ContactWithoutId;
 };
 
 const ContactForm = ({ onSubmit, contact }: Props) => {
