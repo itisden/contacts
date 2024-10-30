@@ -7,7 +7,6 @@ This is a contact management app built using the following technologies:
 - **Tailwind CSS**: For utility-first styling.
 - **shadcn/ui**: For additional UI components.
 - **React Query**: For managing server state and caching.
-- **Firebase SDK**: For storing and retrieving contacts data in Firestore.
 
 ## Getting Started
 
