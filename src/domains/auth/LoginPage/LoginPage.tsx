@@ -1,8 +1,11 @@
 import LoginForm, { type SubmissionValues } from "./LoginForm";
+import { useLogin } from "../hooks/queries";
 
 const LoginPage = () => {
+  const { mutate: login } = useLogin();
+
   const handleSubmit = async (data: SubmissionValues) => {
-    alert(data);
+    await login(data);
   };
 
   return (

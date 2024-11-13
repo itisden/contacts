@@ -1,8 +1,11 @@
 import SignUpForm, { type SubmissionValues } from "./SignUpForm";
+import { useSignup } from "../hooks/queries";
 
 const SignUpPage = () => {
+  const { mutate: signup } = useSignup();
+
   const handleSubmit = async (data: SubmissionValues) => {
-    alert(data);
+    await signup(data);
   };
 
   return (

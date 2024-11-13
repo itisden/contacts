@@ -1,4 +1,5 @@
-import axios from "@/utils/axios";
+import axios from "axios";
+import apiAxios from "@/utils/axios";
 import {
   type SignInWithEmailAndPasswordResponse,
   type SignUpWithEmailAndPasswordResponse,
@@ -9,7 +10,7 @@ export const login = async (
   email: string,
   password: string,
 ): Promise<SignInWithEmailAndPasswordResponse> => {
-  return axios
+  return apiAxios
     .post<SignInWithEmailAndPasswordResponse>("/auth/signin", {
       email,
       password,
@@ -21,7 +22,7 @@ export const signup = async (
   email: string,
   password: string,
 ): Promise<SignUpWithEmailAndPasswordResponse> => {
-  return axios
+  return apiAxios
     .post<SignUpWithEmailAndPasswordResponse>(`/auth/signup/`, {
       email,
       password,
