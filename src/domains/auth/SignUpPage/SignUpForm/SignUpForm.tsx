@@ -68,7 +68,7 @@ const SignUpForm = ({ onSubmit }: Props) => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>

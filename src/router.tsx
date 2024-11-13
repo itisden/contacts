@@ -3,6 +3,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import AuthGuard from "@/components/AuthGuard";
 import GlobalLayout from "@/components/GlobalLayout";
 import NotFound from "@/domains/not-found";
 import ContactListPage from "@/domains/contacts/ContactListPage";
@@ -27,10 +28,12 @@ const router = createBrowserRouter(
       errorElement={<NotFound />}
     >
       <Route errorElement={<NotFound />}>
-        <Route index element={<ContactListPage />} />
-        <Route path="/contact/:contactId?" element={<ContactPage />} />
         <Route path={routes.auth.login} element={<Login />} />
         <Route path={routes.auth.signup} element={<SignUp />} />
+        <Route element={<AuthGuard />}>
+          <Route index element={<ContactListPage />} />
+          <Route path="/contact/:contactId?" element={<ContactPage />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     </Route>,

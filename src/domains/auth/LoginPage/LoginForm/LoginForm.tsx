@@ -25,7 +25,7 @@ const loginFormSchema = z.object({
   email: z.string().email({ message: "Invalid email format" }),
   password: z
     .string()
-    .min(6, { message: "Password must be at least 8 characters long" }),
+    .min(6, { message: "Password must be at least 6 characters long" }),
 });
 
 export type SubmissionValues = z.infer<typeof loginFormSchema>;
@@ -70,7 +70,7 @@ const LoginForm = ({ onSubmit }: Props) => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
