@@ -4,12 +4,10 @@ import ContactForm, { type SubmissionValues } from "../ContactForm";
 import { routes } from "@/router";
 import { useState } from "react";
 import { createEmptyContact } from "@/domains/contacts/utils/contact";
-import { useToast } from "@/hooks/use-toast";
-import { createErrorToastObject } from "@/utils/toasts";
 import { useAddContact } from "@/domains/contacts/hooks/queries";
+import { genericErrorHandler } from "@/utils/errorHandlers";
 
 const CreateContactForm = () => {
-  const { toast } = useToast();
   const { mutateAsync } = useAddContact();
   const [contact] = useState<Contact>(() => createEmptyContact());
   const navigate = useNavigate();
@@ -19,12 +17,7 @@ const CreateContactForm = () => {
       await mutateAsync(values);
       navigate(routes.home);
     } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        toast(createErrorToastObject(e.message));
-      } else {
-        toast(createErrorToastObject());
-      }
+      genericErrorHandler(e);
     }
   };
 

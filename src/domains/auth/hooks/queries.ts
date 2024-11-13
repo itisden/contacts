@@ -8,6 +8,7 @@ import {
 } from "@/domains/auth/types";
 import { routes } from "@/router";
 import { setTokens } from "@/domains/auth/utils/tokens";
+import { genericErrorHandler } from "@/utils/errorHandlers";
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ export const useLogin = () => {
       setTokens(data.idToken, data.refreshToken);
       navigate(routes.home);
     },
+    onError: (error) => {
+      genericErrorHandler(error);
+    },
     retry: false,
   });
 };
@@ -39,6 +43,9 @@ export const useSignup = () => {
     mutationFn: ({ email, password }) => signup(email, password),
     onSuccess: () => {
       navigate(routes.auth.login);
+    },
+    onError: (error) => {
+      genericErrorHandler(error);
     },
     retry: false,
   });

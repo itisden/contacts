@@ -10,10 +10,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useToast } from "@/hooks/use-toast";
 import { Contact } from "@/domains/contacts/types";
 import { useDeleteContact } from "@/domains/contacts/hooks/queries";
-import { createErrorToastObject } from "@/utils/toasts";
+import { genericErrorHandler } from "@/utils/errorHandlers";
 
 type Props = {
   onCancel?: () => void;
@@ -22,19 +21,13 @@ type Props = {
 };
 
 const DeleteContactAlert = ({ onCancel, contact, children }: Props) => {
-  const { toast } = useToast();
   const { isPending, mutateAsync } = useDeleteContact();
 
   const handleDelete = async () => {
     try {
       await mutateAsync(contact.id);
     } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        toast(createErrorToastObject(e.message));
-      } else {
-        toast(createErrorToastObject());
-      }
+      genericErrorHandler(e);
     }
   };
 

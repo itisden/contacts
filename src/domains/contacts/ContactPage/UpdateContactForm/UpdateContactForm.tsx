@@ -2,9 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { type Contact } from "@/domains/contacts/types";
 import { useContact } from "@/domains/contacts/hooks/queries";
 import { routes } from "@/router";
-import { useToast } from "@/hooks/use-toast";
-import { createErrorToastObject } from "@/utils/toasts";
 import { useUpdateContact } from "@/domains/contacts/hooks/queries";
+import { genericErrorHandler } from "@/utils/errorHandlers";
 import ContactForm, { type SubmissionValues } from "../ContactForm";
 
 type Props = {
@@ -12,7 +11,6 @@ type Props = {
 };
 
 const UpdateContactForm = ({ id }: Props) => {
-  const { toast } = useToast();
   const { mutateAsync } = useUpdateContact();
   const { isLoading, data, error } = useContact(id);
   const navigate = useNavigate();
@@ -25,12 +23,7 @@ const UpdateContactForm = ({ id }: Props) => {
       });
       navigate(routes.home);
     } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        toast(createErrorToastObject(e.message));
-      } else {
-        toast(createErrorToastObject());
-      }
+      genericErrorHandler(e);
     }
   };
 
