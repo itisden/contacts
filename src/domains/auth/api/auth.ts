@@ -33,6 +33,7 @@ export const signup = async (
 export const refreshIdToken = async (
   refreshToken: string,
 ): Promise<RefreshTokenResponse> => {
+  // here a new instance of the axios is used so that there is no infinite loop in the interceptor when updating the token
   return axios
     .post<RefreshTokenResponse>("/auth/refresh-token", {
       refreshToken,
