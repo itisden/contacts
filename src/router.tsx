@@ -28,9 +28,11 @@ const router = createBrowserRouter(
       errorElement={<NotFound />}
     >
       <Route errorElement={<NotFound />}>
-        <Route path={routes.auth.login} element={<Login />} />
-        <Route path={routes.auth.signup} element={<SignUp />} />
-        <Route element={<AuthGuard />}>
+        <Route element={<AuthGuard guardType="guest" />}>
+          <Route path={routes.auth.login} element={<Login />} />
+          <Route path={routes.auth.signup} element={<SignUp />} />
+        </Route>
+        <Route element={<AuthGuard guardType="auth" />}>
           <Route index element={<ContactListPage />} />
           <Route path="/contact/:contactId?" element={<ContactPage />} />
         </Route>
