@@ -4,8 +4,10 @@ import { getTokens, setTokens, clearTokens } from "@/domains/auth/utils/tokens";
 import { refreshIdToken } from "@/domains/auth/api/auth";
 import useAuthStore from "@/domains/auth/stores/auth";
 
+export const baseURL = `${env.backendAPI}/api/v1`;
+
 const instance = axios.create({
-  baseURL: `${env.backendAPI}/api/v1`,
+  baseURL,
 });
 
 instance.interceptors.request.use(

@@ -1,5 +1,5 @@
 import axios from "axios";
-import apiAxios from "@/utils/axios";
+import apiAxios, { baseURL } from "@/utils/axios";
 import {
   type SignInWithEmailAndPasswordResponse,
   type SignUpWithEmailAndPasswordResponse,
@@ -35,7 +35,7 @@ export const refreshIdToken = async (
 ): Promise<RefreshTokenResponse> => {
   // here a new instance of the axios is used so that there is no infinite loop in the interceptor when updating the token
   return axios
-    .post<RefreshTokenResponse>("/auth/refresh-token", {
+    .post<RefreshTokenResponse>(`${baseURL}/auth/refresh-token`, {
       refreshToken,
     })
     .then((response) => response.data);
