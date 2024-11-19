@@ -9,9 +9,14 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky",
-    "format": "prettier . --write --ignore-unknown"
+    "format": "prettier . --write --ignore-unknown",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
+    "local-test:e2e:open": "dotenvx run -f .env.test -- cypress open",
+    "local-test:e2e": "dotenvx run -f .env.test -- cypress run"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.24.0",
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-alert-dialog": "^1.1.2",
@@ -41,6 +46,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
+    "cypress": "^13.15.2",
     "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",

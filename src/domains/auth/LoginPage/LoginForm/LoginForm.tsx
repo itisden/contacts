@@ -59,9 +59,9 @@ const LoginForm = ({ onSubmit }: Props) => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input data-test="email-input" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="email-msg" />
                   </FormItem>
                 )}
               />
@@ -72,17 +72,27 @@ const LoginForm = ({ onSubmit }: Props) => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} />
+                      <Input
+                        data-test="password-input"
+                        type="password"
+                        {...field}
+                      />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="password-msg" />
                   </FormItem>
                 )}
               />
             </div>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Link to={routes.auth.signup}>Sign Up</Link>
-            <Button type="submit" disabled={form.formState.isSubmitting}>
+            <Link data-test="to-signup-button" to={routes.auth.signup}>
+              Sign Up
+            </Link>
+            <Button
+              data-test="submit-button"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               Login
             </Button>
           </CardFooter>

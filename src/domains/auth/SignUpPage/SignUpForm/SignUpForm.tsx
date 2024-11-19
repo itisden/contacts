@@ -23,7 +23,7 @@ import { routes } from "@/router";
 
 const signUpFormSchema = z.object({
   email: z.string().email({ message: "Invalid email format" }),
-  password: z.string({ message: "Password is required" }),
+  password: z.string().min(1, "Password is required"),
 });
 
 export type SubmissionValues = z.infer<typeof signUpFormSchema>;
@@ -57,9 +57,9 @@ const SignUpForm = ({ onSubmit }: Props) => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input data-test="email-input" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="email-msg" />
                   </FormItem>
                 )}
               />
@@ -70,17 +70,27 @@ const SignUpForm = ({ onSubmit }: Props) => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} />
+                      <Input
+                        data-test="password-input"
+                        type="password"
+                        {...field}
+                      />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="password-msg" />
                   </FormItem>
                 )}
               />
             </div>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Link to={routes.auth.login}>Login</Link>
-            <Button type="submit" disabled={form.formState.isSubmitting}>
+            <Link data-test="to-login-button" to={routes.auth.login}>
+              Login
+            </Link>
+            <Button
+              data-test="submit-button"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               Sign up
             </Button>
           </CardFooter>

@@ -15,7 +15,7 @@ const Header = () => {
             <Button asChild>
               <Link to={routes.contact()}>+ Add Contact</Link>
             </Button>
-            <Button variant="outline" onClick={logout}>
+            <Button data-test="logout" variant="outline" onClick={logout}>
               Logout
             </Button>
           </div>
