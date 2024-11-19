@@ -44,7 +44,11 @@ const DeleteContactAlert = ({ onCancel, contact, children }: Props) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={onCancel}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete} disabled={isPending}>
+          <AlertDialogAction
+            data-test="delete-contact-confirmation"
+            onClick={handleDelete}
+            disabled={isPending}
+          >
             {isPending ? "Deleting" : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>

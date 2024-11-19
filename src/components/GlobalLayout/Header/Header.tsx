@@ -12,7 +12,7 @@ const Header = () => {
         <Link to={routes.home}>Contacts App</Link>
         {isAuthenticated && (
           <div className="flex space-x-4">
-            <Button asChild>
+            <Button data-test="add-contact" asChild>
               <Link to={routes.contact()}>+ Add Contact</Link>
             </Button>
             <Button data-test="logout" variant="outline" onClick={logout}>

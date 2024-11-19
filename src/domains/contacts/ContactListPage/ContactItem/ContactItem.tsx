@@ -22,6 +22,7 @@ const ContactItem = ({ data, className }: Props) => {
         "flex flex-row rounded-md border p-4 hover:bg-slate-50",
         className,
       )}
+      data-item="contact-item"
     >
       <Avatar className="mr-4 grow-0">
         <AvatarFallback>{initials}</AvatarFallback>
@@ -36,6 +37,7 @@ const ContactItem = ({ data, className }: Props) => {
               size="icon"
               className="rounded-full"
               asChild
+              data-test="edit-contact"
             >
               <Link to={routes.contact(data.id)}>
                 <PencilIcon />
@@ -46,6 +48,7 @@ const ContactItem = ({ data, className }: Props) => {
                 variant="outline"
                 size="icon"
                 className="ml-2 rounded-full"
+                data-test="delete-contact"
               >
                 <TrashIcon />
               </Button>

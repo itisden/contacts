@@ -72,9 +72,9 @@ const ContactForm = ({ onSubmit, contact }: Props) => {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input data-test="username-input" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="username-msg" />
                   </FormItem>
                 )}
               />
@@ -85,9 +85,9 @@ const ContactForm = ({ onSubmit, contact }: Props) => {
                   <FormItem>
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input data-test="fullname-input" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="fullname-msg" />
                   </FormItem>
                 )}
               />
@@ -98,9 +98,9 @@ const ContactForm = ({ onSubmit, contact }: Props) => {
                   <FormItem>
                     <FormLabel>Phone Number</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input data-test="phone-input" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="phone-msg" />
                   </FormItem>
                 )}
               />
@@ -111,19 +111,23 @@ const ContactForm = ({ onSubmit, contact }: Props) => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input data-test="email-input" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage data-test="email-msg" />
                   </FormItem>
                 )}
               />
             </div>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Button variant="outline" asChild>
+            <Button data-test="cancel" variant="outline" asChild>
               <Link to={routes.home}>Cancel</Link>
             </Button>
-            <Button type="submit" disabled={form.formState.isSubmitting}>
+            <Button
+              data-test="submit"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               {form.formState.isSubmitting ? "Saving" : "Save"}
             </Button>
           </CardFooter>
