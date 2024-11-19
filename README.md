@@ -37,3 +37,23 @@ npm install
 ```bash
 npm run dev
 ```
+
+6. To run e2e test in local environment copy `.env.test.example` file into `.env.test` and execute:
+
+```bash
+npm run dev
+npm run local-test:e2e
+```
+
+6. To run unit tests:
+
+```bash
+npm run test:unit
+```
+
+7. To run `eslint` and `prettier`:
+
+```bash
+npm run lint
+npm run format
+```
