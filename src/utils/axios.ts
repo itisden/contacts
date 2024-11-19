@@ -1,6 +1,6 @@
 import axios from "axios";
 import { env } from "@/config";
-import { getTokens, setTokens, clearTokens } from "@/domains/auth/utils/tokens";
+import { getTokens, setTokens } from "@/domains/auth/utils/tokens";
 import { refreshIdToken } from "@/domains/auth/api/auth";
 import useAuthStore from "@/domains/auth/stores/auth";
 
@@ -35,7 +35,6 @@ instance.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${response.id_token}`;
           return instance(originalRequest);
         } catch (refreshError) {
-          clearTokens();
           useAuthStore.getState().logout();
           return Promise.reject(refreshError);
         }

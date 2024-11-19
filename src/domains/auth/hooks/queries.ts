@@ -7,7 +7,6 @@ import {
   type SignUpWithEmailAndPasswordResponse,
 } from "@/domains/auth/types";
 import { routes } from "@/router";
-import { setTokens } from "@/domains/auth/utils/tokens";
 import { genericErrorHandler } from "@/utils/errorHandlers";
 
 export const useLogin = () => {
@@ -22,7 +21,6 @@ export const useLogin = () => {
     mutationFn: ({ email, password }) => login(email, password),
     onSuccess: (data: SignInWithEmailAndPasswordResponse) => {
       authenticate(data);
-      setTokens(data.idToken, data.refreshToken);
       navigate(routes.home);
     },
     onError: (error) => {

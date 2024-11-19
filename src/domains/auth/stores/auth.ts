@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { type SignInWithEmailAndPasswordResponse } from "../types";
-import { getTokens, clearTokens } from "@/domains/auth/utils/tokens";
+import { setTokens, getTokens, clearTokens } from "@/domains/auth/utils/tokens";
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -10,8 +10,9 @@ interface AuthState {
 
 const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: Boolean(getTokens()),
-  authenticate: () => {
+  authenticate: ({ idToken, refreshToken }) => {
     set({ isAuthenticated: true });
+    setTokens(idToken, refreshToken);
   },
   logout: () => {
     set({ isAuthenticated: false });
